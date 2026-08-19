@@ -1,1601 +1,2188 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ideefix – Keine Idee? Ideefix.</title>
-    <meta name="description" content="Ideefix findet kreative Ideen für Freizeit, Freunde, Familie, Schule und mehr.">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: #f7f8f4;
-            color: #17221b;
-            line-height: 1.6;
-        }
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        /* =========================
-           NAVIGATION
-        ========================= */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(247, 248, 244, 0.94);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #e2e6df;
-        }
-
-        .nav {
-            max-width: 1150px;
-            margin: auto;
-            padding: 16px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: #17221b;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: #49a86b;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 26px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #344238;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .nav-links a:hover {
-            color: #49a86b;
-        }
-
-        .nav-button {
-            background: #49a86b;
-            color: white !important;
-            padding: 10px 17px;
-            border-radius: 12px;
-        }
-
-        .nav-button:hover {
-            background: #398c57;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 680px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 22px;
-            background:
-                radial-gradient(circle at 15% 20%, rgba(73, 168, 107, 0.13), transparent 30%),
-                radial-gradient(circle at 85% 80%, rgba(246, 193, 80, 0.12), transparent 30%);
-        }
-
-        .hero-content {
-            max-width: 900px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #e3f2e8;
-            color: #287347;
-            padding: 8px 15px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-size: clamp(52px, 9vw, 92px);
-            line-height: 0.95;
-            letter-spacing: -5px;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 span {
-            color: #49a86b;
-        }
-
-        .hero-subtitle {
-            max-width: 650px;
-            margin: auto;
-            font-size: 20px;
-            color: #536158;
-            margin-bottom: 35px;
-        }
-
-        .search-box {
-            max-width: 720px;
-            margin: auto;
-            background: white;
-            padding: 10px;
-            border: 1px solid #dfe5de;
-            border-radius: 20px;
-            box-shadow: 0 18px 45px rgba(24, 48, 31, 0.09);
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-box input {
-            flex: 1;
-            min-width: 0;
-            border: none;
-            outline: none;
-            padding: 16px;
-            font-size: 17px;
-            color: #17221b;
-            background: transparent;
-        }
-
-        .primary-button {
-            border: none;
-            background: #49a86b;
-            color: white;
-            padding: 15px 23px;
-            border-radius: 14px;
-            font-weight: 700;
-            transition: 0.2s;
-        }
-
-        .primary-button:hover {
-            background: #398c57;
-            transform: translateY(-1px);
-        }
-
-        .quick-options {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-top: 20px;
-        }
-
-        .quick-option {
-            border: 1px solid #dce3dc;
-            background: white;
-            color: #48554c;
-            padding: 9px 14px;
-            border-radius: 999px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .quick-option:hover {
-            border-color: #49a86b;
-            color: #287347;
-            transform: translateY(-2px);
-        }
-
-        /* =========================
-           SECTIONS
-        ========================= */
-
-        section {
-            padding: 90px 22px;
-        }
-
-        .section-container {
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(32px, 5vw, 48px);
-            letter-spacing: -2px;
-            margin-bottom: 12px;
-        }
-
-        .section-heading p {
-            color: #637067;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        /* =========================
-           IDEENFINDER
-        ========================= */
-
-        .finder {
-            background: white;
-        }
-
-        .finder-card {
-            max-width: 850px;
-            margin: auto;
-            background: #f7f8f4;
-            border: 1px solid #e0e6df;
-            border-radius: 24px;
-            padding: 30px;
-        }
-
-        .finder-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
-
-        .field label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .field select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d4ddd5;
-            border-radius: 12px;
-            background: white;
-            color: #17221b;
-            outline: none;
-        }
-
-        .finder-button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 16px;
-            border: none;
-            border-radius: 13px;
-            background: #49a86b;
-            color: white;
-            font-weight: 800;
-            font-size: 17px;
-        }
-
-        .finder-button:hover {
-            background: #398c57;
-        }
-
-        /* =========================
-           RESULT
-        ========================= */
-
-        .result {
-            display: none;
-            max-width: 850px;
-            margin: 25px auto 0;
-            background: white;
-            border: 1px solid #dfe7df;
-            border-radius: 22px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(20, 45, 27, 0.08);
-        }
-
-        .result.show {
-            display: block;
-            animation: appear 0.3s ease;
-        }
-
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result h3 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .result-description {
-            color: #59655d;
-            margin-bottom: 20px;
-        }
-
-        .result-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-bottom: 20px;
-        }
-
-        .detail {
-            background: #edf5ef;
-            color: #2d7247;
-            padding: 7px 12px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .result h4 {
-            margin: 18px 0 8px;
-        }
-
-        .result ol,
-        .result ul {
-            padding-left: 22px;
-        }
-
-        .result-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .secondary-button {
-            border: 1px solid #d3ddd4;
-            background: white;
-            color: #344238;
-            padding: 12px 17px;
-            border-radius: 12px;
-            font-weight: 700;
-        }
-
-        .secondary-button:hover {
-            border-color: #49a86b;
-            color: #287347;
-        }
-
-        /* =========================
-           KATEGORIEN
-        ========================= */
-
-        .categories {
-            background: #f7f8f4;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-        }
-
-        .category {
-            background: white;
-            border: 1px solid #e0e6df;
-            border-radius: 18px;
-            padding: 25px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .category:hover {
-            transform: translateY(-5px);
-            border-color: #49a86b;
-            box-shadow: 0 10px 25px rgba(25, 55, 32, 0.08);
-        }
-
-        .category-icon {
-            font-size: 33px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .category strong {
-            font-size: 15px;
-        }
-
-        /* =========================
-           ÜBERRASCHUNG
-        ========================= */
-
-        .surprise {
-            background: #17221b;
-            color: white;
-            text-align: center;
-        }
-
-        .surprise .section-heading p {
-            color: #b7c4ba;
-        }
-
-        .surprise-box {
-            max-width: 650px;
-            margin: auto;
-        }
-
-        .surprise-button {
-            border: none;
-            background: #f4c95d;
-            color: #17221b;
-            padding: 16px 28px;
-            border-radius: 14px;
-            font-weight: 800;
-            font-size: 17px;
-            transition: 0.2s;
-        }
-
-        .surprise-button:hover {
-            transform: scale(1.03);
-        }
-
-        #surpriseResult {
-            margin-top: 25px;
-            font-size: 25px;
-            font-weight: 700;
-            min-height: 40px;
-        }
-
-        /* =========================
-           ÜBER IDEEFIX
-        ========================= */
-
-        .about {
-            background: white;
-        }
-
-        .about-content {
-            max-width: 750px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            color: #59655d;
-            font-size: 18px;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #101812;
-            color: white;
-            padding: 45px 22px;
-        }
-
-        .footer-container {
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 800;
-        }
-
-        .footer-logo span {
-            color: #65c786;
-        }
-
-        .footer-text {
-            color: #aab5ad;
-            max-width: 420px;
-            margin-top: 8px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .footer-links a {
-            color: #d6ded8;
-            text-decoration: none;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 800px) {
-            .nav-links a:not(.nav-button) {
-                display: none;
-            }
-
-            .hero {
-                min-height: 600px;
-                padding-top: 60px;
-            }
-
-            .hero h1 {
-                letter-spacing: -3px;
-            }
-
-            .search-box {
-                flex-direction: column;
-            }
-
-            .search-box .primary-button {
-                width: 100%;
-            }
-
-            .finder-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            section {
-                padding: 70px 18px;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .hero h1 {
-                font-size: 50px;
-            }
-
-            .hero-subtitle {
-                font-size: 17px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .finder-card,
-            .result {
-                padding: 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ideefix – Keine Idee? Ideefix.</title>
+<meta name="description" content="Ideefix findet kreative Ideen für Freizeit, Freunde, Familie, Schule und mehr.">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f7f8f4;
+    color: #17221b;
+    line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(247,248,244,.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e6df;
+}
+
+.nav {
+    max-width: 1150px;
+    margin: auto;
+    padding: 15px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #17221b;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #49a86b;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: #344238;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.nav-links a:hover {
+    color: #49a86b;
+}
+
+.nav-button {
+    background: #49a86b;
+    color: white !important;
+    padding: 9px 14px;
+    border-radius: 11px;
+}
+
+.nav-button:hover {
+    background: #398c57;
+}
+
+main {
+    overflow: hidden;
+}
+
+section {
+    padding: 85px 22px;
+}
+
+.section-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading h2 {
+    font-size: clamp(32px,5vw,48px);
+    letter-spacing: -2px;
+    margin-bottom: 10px;
+}
+
+.section-heading p {
+    color: #637067;
+    max-width: 650px;
+    margin: auto;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 22px;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(73,168,107,.14),transparent 30%),
+        radial-gradient(circle at 85% 80%,rgba(246,193,80,.13),transparent 30%);
+}
+
+.hero-content {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    background: #e3f2e8;
+    color: #287347;
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(52px,9vw,92px);
+    line-height: .95;
+    letter-spacing: -5px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #49a86b;
+}
+
+.hero-subtitle {
+    max-width: 650px;
+    margin: auto;
+    font-size: 20px;
+    color: #536158;
+    margin-bottom: 35px;
+}
+
+.search-box {
+    max-width: 720px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border: 1px solid #dfe5de;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(24,48,31,.09);
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    padding: 16px;
+    font-size: 17px;
+    color: #17221b;
+}
+
+.primary-button {
+    border: none;
+    background: #49a86b;
+    color: white;
+    padding: 15px 23px;
+    border-radius: 14px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.primary-button:hover {
+    background: #398c57;
+    transform: translateY(-1px);
+}
+
+.quick-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 20px;
+}
+
+.quick-option {
+    border: 1px solid #dce3dc;
+    background: white;
+    color: #48554c;
+    padding: 9px 14px;
+    border-radius: 999px;
+    transition: .2s;
+}
+
+.quick-option:hover {
+    border-color: #49a86b;
+    color: #287347;
+}
+
+/* FINDER */
+
+.finder {
+    background: white;
+}
+
+.finder-card {
+    max-width: 850px;
+    margin: auto;
+    background: #f7f8f4;
+    border: 1px solid #e0e6df;
+    border-radius: 24px;
+    padding: 30px;
+}
+
+.finder-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 22px;
+}
+
+.field label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.field select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d4ddd5;
+    border-radius: 12px;
+    background: white;
+    color: #17221b;
+    outline: none;
+}
+
+.finder-button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    border: none;
+    border-radius: 13px;
+    background: #49a86b;
+    color: white;
+    font-weight: 800;
+    font-size: 17px;
+}
+
+.finder-button:hover {
+    background: #398c57;
+}
+
+/* RESULT */
+
+.result {
+    display: none;
+    max-width: 850px;
+    margin: 25px auto 0;
+    background: white;
+    border: 1px solid #dfe7df;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(20,45,27,.08);
+}
+
+.result.show {
+    display: block;
+    animation: appear .3s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result h3 {
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.result-description {
+    color: #59655d;
+    margin-bottom: 20px;
+}
+
+.result-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 20px;
+}
+
+.detail {
+    background: #edf5ef;
+    color: #2d7247;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.result h4 {
+    margin: 18px 0 8px;
+}
+
+.result ol,
+.result ul {
+    padding-left: 22px;
+}
+
+.result-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.secondary-button {
+    border: 1px solid #d3ddd4;
+    background: white;
+    color: #344238;
+    padding: 12px 17px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.secondary-button:hover {
+    border-color: #49a86b;
+    color: #287347;
+}
+
+.favorite-button.saved {
+    background: #ffe9ee;
+    border-color: #f2b9c6;
+    color: #a52c49;
+}
+
+/* CATEGORIES */
+
+.categories {
+    background: #f7f8f4;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 15px;
+}
+
+.category {
+    background: white;
+    border: 1px solid #e0e6df;
+    border-radius: 18px;
+    padding: 25px 15px;
+    text-align: center;
+    transition: .2s;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    border-color: #49a86b;
+    box-shadow: 0 10px 25px rgba(25,55,32,.08);
+}
+
+.category-icon {
+    font-size: 33px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* SURPRISE */
+
+.surprise {
+    background: #17221b;
+    color: white;
+    text-align: center;
+}
+
+.surprise .section-heading p {
+    color: #b7c4ba;
+}
+
+.surprise-button {
+    border: none;
+    background: #f4c95d;
+    color: #17221b;
+    padding: 16px 28px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 17px;
+    transition: .2s;
+}
+
+.surprise-button:hover {
+    transform: scale(1.03);
+}
+
+.surprise-result {
+    max-width: 850px;
+    margin: 30px auto 0;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 22px;
+    padding: 28px;
+    text-align: left;
+    display: none;
+}
+
+.surprise-result.show {
+    display: block;
+    animation: appear .3s ease;
+}
+
+.surprise-result h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.surprise-result p {
+    color: #d4ddd7;
+}
+
+.surprise-result h4 {
+    margin: 18px 0 8px;
+}
+
+.surprise-result ol,
+.surprise-result ul {
+    padding-left: 22px;
+}
+
+/* SAVED IDEAS */
+
+.saved {
+    background: white;
+}
+
+.idea-list {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.idea-card {
+    background: #f7f8f4;
+    border: 1px solid #dfe6df;
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.idea-card h3 {
+    margin-bottom: 8px;
+}
+
+.idea-card p {
+    color: #637067;
+}
+
+.idea-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 35px 20px;
+    background: #f7f8f4;
+    border-radius: 18px;
+    color: #68736c;
+}
+
+/* OWN IDEAS */
+
+.own-ideas {
+    background: #f7f8f4;
+}
+
+.form-card {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border: 1px solid #dfe6df;
+    border-radius: 22px;
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d4ddd5;
+    border-radius: 12px;
+    outline: none;
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+}
+
+.add-button {
+    width: 100%;
+    border: none;
+    background: #49a86b;
+    color: white;
+    padding: 15px;
+    border-radius: 13px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.my-ideas {
+    max-width: 850px;
+    margin: 30px auto 0;
+}
+
+.my-idea-card {
+    background: white;
+    border: 1px solid #dfe6df;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 15px;
+}
+
+.my-idea-card h3 {
+    margin-bottom: 6px;
+}
+
+.my-idea-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+/* ABOUT */
+
+.about {
+    background: white;
+}
+
+.about-content {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+}
+
+.about-content p {
+    color: #59655d;
+    font-size: 18px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #101812;
+    color: white;
+    padding: 45px 22px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.footer-logo span {
+    color: #65c786;
+}
+
+.footer-text {
+    color: #aab5ad;
+    margin-top: 8px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #d6ded8;
+    text-decoration: none;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .nav {
+        padding: 13px 16px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a:not(.nav-button) {
+        display: none;
+    }
+
+    .hero {
+        min-height: 600px;
+        padding-top: 60px;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box .primary-button {
+        width: 100%;
+    }
+
+    .finder-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .idea-list {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 70px 18px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+    .hero-subtitle {
+        font-size: 17px;
+    }
+
+    .finder-card,
+    .result,
+    .form-card {
+        padding: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVIGATION
-    ========================= -->
+<header>
+<nav class="nav">
 
-    <header>
-        <nav class="nav">
+<a href="#start" class="logo">
+Idee<span>fix</span>
+</a>
 
-            <a href="#start" class="logo">
-                Idee<span>fix</span>
-            </a>
+<div class="nav-links">
+<a href="#finder">Ideen finden</a>
+<a href="#kategorien">Kategorien</a>
+<a href="#saved">❤️ Merkliste</a>
+<a href="#own">✏️ Eigene Ideen</a>
+<a href="#finder" class="nav-button">Idee finden</a>
+</div>
 
-            <div class="nav-links">
-                <a href="#finder">Ideen finden</a>
-                <a href="#kategorien">Kategorien</a>
-                <a href="#about">Über Ideefix</a>
-                <a href="#finder" class="nav-button">Idee finden</a>
+</nav>
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="start">
+
+<div class="hero-content">
+
+<div class="badge">
+💡 Dein Ideenhelfer
+</div>
+
+<h1>
+Keine Idee?<br>
+<span>Ideefix.</span>
+</h1>
+
+<p class="hero-subtitle">
+Sag uns, was du vorhast – Ideefix findet eine passende Idee für dich.
+</p>
+
+<div class="search-box">
+
+<input
+type="text"
+id="heroInput"
+placeholder="Was möchtest du machen?"
+aria-label="Was möchtest du machen?"
+>
+
+<button class="primary-button" onclick="findFromHero()">
+✨ Idee finden
+</button>
+
+</div>
+
+<div class="quick-options">
+
+<button class="quick-option" onclick="setHeroText('Mir ist langweilig')">
+😴 Mir ist langweilig
+</button>
+
+<button class="quick-option" onclick="setHeroText('Etwas mit Freunden')">
+👥 Mit Freunden
+</button>
+
+<button class="quick-option" onclick="setHeroText('Etwas draußen')">
+🌳 Draußen
+</button>
+
+<button class="quick-option" onclick="setHeroText('Etwas Kreatives')">
+🎨 Kreativ
+</button>
+
+<button class="quick-option" onclick="setHeroText('Für die Schule')">
+📚 Schule
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- IDEENFINDER -->
+
+<section class="finder" id="finder">
+
+<div class="section-container">
+
+<div class="section-heading">
+
+<h2>Finde deine Idee</h2>
+
+<p>
+Je mehr du uns verrätst, desto besser kann Ideefix
+die Vorschläge auf dich abstimmen.
+</p>
+
+</div>
+
+<div class="finder-card">
+
+<div class="finder-grid">
+
+<div class="field">
+
+<label for="category">
+Was suchst du?
+</label>
+
+<select id="category">
+
+<option value="freizeit">Freizeit</option>
+<option value="freunde">Freunde</option>
+<option value="familie">Familie</option>
+<option value="schule">Schule</option>
+<option value="kreativ">Kreativität</option>
+<option value="lernen">Lernen</option>
+<option value="sport">Sport</option>
+<option value="abenteuer">Abenteuer</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="people">
+Wie viele Personen?
+</label>
+
+<select id="people">
+
+<option value="1">1 Person</option>
+<option value="2">2 Personen</option>
+<option value="group">3–5 Personen</option>
+<option value="many">6+ Personen</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="time">
+Wie viel Zeit?
+</label>
+
+<select id="time">
+
+<option value="short">10–30 Minuten</option>
+<option value="medium">30–60 Minuten</option>
+<option value="long">1–3 Stunden</option>
+<option value="day">Ein ganzer Tag</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="budget">
+Dein Budget
+</label>
+
+<select id="budget">
+
+<option value="free">0 €</option>
+<option value="small">Bis 5 €</option>
+<option value="medium">Bis 15 €</option>
+<option value="large">Bis 30 €</option>
+<option value="any">Egal</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="location">
+Wo?
+</label>
+
+<select id="location">
+
+<option value="inside">Drinnen</option>
+<option value="outside">Draußen</option>
+<option value="any">Egal</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button class="finder-button" onclick="generateIdea()">
+💡 Meine Idee finden
+</button>
+
+</div>
+
+
+<div class="result" id="result">
+
+<h3 id="resultTitle"></h3>
+
+<p class="result-description" id="resultDescription"></p>
+
+<div class="result-details">
+
+<span class="detail" id="resultTime"></span>
+<span class="detail" id="resultCost"></span>
+<span class="detail" id="resultPeople"></span>
+
+</div>
+
+<h4>So geht's</h4>
+
+<ol id="resultSteps"></ol>
+
+<h4>Das brauchst du</h4>
+
+<ul id="resultMaterials"></ul>
+
+<div class="result-actions">
+
+<button class="secondary-button" onclick="generateIdea()">
+🔄 Andere Idee
+</button>
+
+<button
+class="secondary-button favorite-button"
+id="favoriteButton"
+onclick="saveCurrentIdea()"
+>
+♡ Merken
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- KATEGORIEN -->
+
+<section class="categories" id="kategorien">
+
+<div class="section-container">
+
+<div class="section-heading">
+
+<h2>Was suchst du?</h2>
+
+<p>
+Stöbere durch unsere Ideen.
+</p>
+
+</div>
+
+<div class="category-grid">
+
+<div class="category" onclick="chooseCategory('freizeit')">
+<span class="category-icon">🎯</span>
+<strong>Freizeit</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('freunde')">
+<span class="category-icon">👥</span>
+<strong>Freunde</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('familie')">
+<span class="category-icon">🏠</span>
+<strong>Familie</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('kreativ')">
+<span class="category-icon">🎨</span>
+<strong>Kreativ</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('schule')">
+<span class="category-icon">📚</span>
+<strong>Schule</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('lernen')">
+<span class="category-icon">🧠</span>
+<strong>Lernen</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('sport')">
+<span class="category-icon">🏃</span>
+<strong>Sport</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('abenteuer')">
+<span class="category-icon">🗺️</span>
+<strong>Abenteuer</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('freizeit')">
+<span class="category-icon">🎬</span>
+<strong>Videos</strong>
+</div>
+
+<div class="category" onclick="chooseCategory('kreativ')">
+<span class="category-icon">🎁</span>
+<strong>Geschenke</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ÜBERRASCH MICH -->
+
+<section class="surprise">
+
+<div class="section-container">
+
+<div class="section-heading">
+
+<h2>Keine Lust zu suchen?</h2>
+
+<p>
+Dann lass Ideefix entscheiden.
+</p>
+
+</div>
+
+<button class="surprise-button" onclick="surpriseMe()">
+✨ Überrasch mich!
+</button>
+
+<div class="surprise-result" id="surpriseResult"></div>
+
+</div>
+
+</section>
+
+
+<!-- MERKLISTE -->
+
+<section class="saved" id="saved">
+
+<div class="section-container">
+
+<div class="section-heading">
+
+<h2>❤️ Deine Merkliste</h2>
+
+<p>
+Hier findest du alle Ideen, die du gespeichert hast.
+</p>
+
+</div>
+
+<div id="savedList" class="idea-list"></div>
+
+</div>
+
+</section>
+
+
+<!-- EIGENE IDEEN -->
+
+<section class="own-ideas" id="own">
+
+<div class="section-container">
+
+<div class="section-heading">
+
+<h2>✏️ Deine eigene Idee</h2>
+
+<p>
+Hast du selbst eine Idee? Erstelle sie und speichere sie bei Ideefix.
+</p>
+
+</div>
+
+<div class="form-card">
+
+<div class="form-group">
+
+<label for="ownTitle">
+Name der Idee
+</label>
+
+<input
+type="text"
+id="ownTitle"
+placeholder="z. B. Nachtwanderung"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="ownDescription">
+Kurzbeschreibung
+</label>
+
+<textarea
+id="ownDescription"
+placeholder="Was macht man bei dieser Idee?"
+></textarea>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="ownTime">
+Zeit
+</label>
+
+<input
+type="text"
+id="ownTime"
+placeholder="z. B. 1 Stunde"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="ownCost">
+Kosten
+</label>
+
+<input
+type="text"
+id="ownCost"
+placeholder="z. B. 0 €"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="ownPeople">
+Personen
+</label>
+
+<input
+type="text"
+id="ownPeople"
+placeholder="z. B. 2–6"
+>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="ownSteps">
+Anleitung
+</label>
+
+<textarea
+id="ownSteps"
+placeholder="Schreibe jeden Schritt in eine neue Zeile."
+></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="ownMaterials">
+Das brauchst du
+</label>
+
+<textarea
+id="ownMaterials"
+placeholder="Schreibe jeden Gegenstand in eine neue Zeile."
+></textarea>
+
+</div>
+
+
+<button class="add-button" onclick="addOwnIdea()">
+➕ Eigene Idee speichern
+</button>
+
+</div>
+
+
+<div class="my-ideas" id="myIdeas"></div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="section-container">
+
+<div class="about-content">
+
+<div class="section-heading">
+
+<h2>Was ist Ideefix?</h2>
+
+</div>
+
+<p>
+Ideefix ist für alle Momente, in denen dir einfach keine Idee einfällt.
+</p>
+
+<br>
+
+<p>
+Egal ob Langeweile, Freizeit, Schule, Freunde oder ein spontanes Abenteuer –
+Ideefix hilft dir dabei, schnell etwas Passendes zu finden.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<div class="footer-logo">
+Idee<span>fix</span>
+</div>
+
+<p class="footer-text">
+Keine Idee? Ideefix.
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<a href="#start">Startseite</a>
+<a href="#finder">Ideen finden</a>
+<a href="#saved">Merkliste</a>
+<a href="#own">Eigene Ideen</a>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   IDEEN-DATENBANK
+========================================= */
+
+const ideas = [
+
+{
+title:"Dreht euren eigenen 5-Minuten-Film",
+description:"Erfindet eine absurde Geschichte und dreht daraus einen kurzen Film.",
+time:"ca. 1 Stunde",
+cost:"0 €",
+people:"2–6 Personen",
+categories:["freunde","kreativ","freizeit"],
+locations:["inside","outside"],
+steps:[
+"Denkt euch eine möglichst verrückte Geschichte aus.",
+"Verteilt die Rollen.",
+"Dreht mehrere kurze Szenen mit dem Smartphone.",
+"Schneidet die Szenen zu einem Film zusammen.",
+"Schaut euch euren Film gemeinsam an."
+],
+materials:["Smartphone","ein paar Requisiten","Freunde"]
+},
+
+{
+title:"Die 10-Euro-Challenge",
+description:"Ihr habt ein kleines Budget und müsst damit den besten gemeinsamen Nachmittag planen.",
+time:"2–3 Stunden",
+cost:"bis 10 €",
+people:"2–6 Personen",
+categories:["freunde","abenteuer","freizeit"],
+locations:["outside"],
+steps:[
+"Legt ein gemeinsames Budget von 10 € fest.",
+"Überlegt euch drei verschiedene Möglichkeiten.",
+"Entscheidet euch gemeinsam für eine.",
+"Setzt euren Plan um.",
+"Bewertet am Ende, wie gut ihr das Geld eingesetzt habt."
+],
+materials:["10 €","Papier oder Smartphone","Kreativität"]
+},
+
+{
+title:"Erfinde ein komplett neues Spiel",
+description:"Entwickle ein Spiel, das es noch nicht gibt.",
+time:"30–60 Minuten",
+cost:"0 €",
+people:"1–5 Personen",
+categories:["kreativ","freunde","familie"],
+locations:["inside"],
+steps:[
+"Überlegt euch das Ziel des Spiels.",
+"Legt drei bis fünf Regeln fest.",
+"Baut ein einfaches Spielfeld oder Material.",
+"Spielt eine Testrunde.",
+"Verbessert die Regeln."
+],
+materials:["Papier","Stifte","Alltagsgegenstände"]
+},
+
+{
+title:"Foto-Safari",
+description:"Geht nach draußen und sucht ungewöhnliche Motive.",
+time:"30–60 Minuten",
+cost:"0 €",
+people:"1–5 Personen",
+categories:["freizeit","abenteuer","freunde"],
+locations:["outside"],
+steps:[
+"Erstellt eine Liste mit zehn Motiven.",
+"Geht nach draußen.",
+"Versucht jedes Motiv zu fotografieren.",
+"Gebt euch gegenseitig Punkte.",
+"Kürt das beste Foto."
+],
+materials:["Smartphone","Liste mit Motiven"]
+},
+
+{
+title:"Lerne etwas völlig Neues",
+description:"Suche dir eine Fähigkeit aus, die du heute zum ersten Mal ausprobierst.",
+time:"30–60 Minuten",
+cost:"0 €",
+people:"1 Person",
+categories:["lernen","kreativ","freizeit"],
+locations:["inside","outside"],
+steps:[
+"Wähle eine neue Fähigkeit.",
+"Suche dir eine einfache Einführung.",
+"Übe 30 Minuten.",
+"Versuche etwas Eigenes damit zu machen.",
+"Notiere, was du gelernt hast."
+],
+materials:["Smartphone oder Computer","Material passend zur Fähigkeit"]
+},
+
+{
+title:"Mini-Olympiade",
+description:"Veranstaltet eure eigene verrückte Sportolympiade.",
+time:"1–2 Stunden",
+cost:"0 €",
+people:"3–10 Personen",
+categories:["sport","freunde","familie"],
+locations:["outside"],
+steps:[
+"Erfindet fünf ungewöhnliche Disziplinen.",
+"Legt Punkte fest.",
+"Bildet Teams oder tretet einzeln an.",
+"Führt die Wettbewerbe durch.",
+"Kürt den Sieger."
+],
+materials:["Sportkleidung","Alltagsgegenstände","Stift und Papier"]
+},
+
+{
+title:"Der verrückte Kochabend",
+description:"Kocht gemeinsam ein Gericht, das niemand vorher kennt.",
+time:"1–3 Stunden",
+cost:"bis 15 €",
+people:"2–6 Personen",
+categories:["familie","freunde","kreativ"],
+locations:["inside"],
+steps:[
+"Legt ein Budget fest.",
+"Kauft ungewöhnliche Zutaten.",
+"Erfindet gemeinsam ein Gericht.",
+"Kocht zusammen.",
+"Bewertet das Ergebnis."
+],
+materials:["Zutaten","Küche","Papier für die Bewertung"]
+},
+
+{
+title:"Die geheime Mission",
+description:"Erfindet eine kleine Schnitzeljagd mit geheimen Aufgaben.",
+time:"1–2 Stunden",
+cost:"0 €",
+people:"2–8 Personen",
+categories:["abenteuer","freunde","familie"],
+locations:["outside"],
+steps:[
+"Erfindet mehrere Hinweise.",
+"Versteckt die Hinweise.",
+"Legt eine finale Aufgabe fest.",
+"Startet die Mission.",
+"Findet gemeinsam den Schatz."
+],
+materials:["Papier","Stifte","kleiner Schatz"]
+},
+
+{
+title:"Schulprojekt aus einer verrückten Idee",
+description:"Nimm ein normales Thema und verwandle es in ein ungewöhnliches Projekt.",
+time:"1–3 Stunden",
+cost:"0 €",
+people:"1–5 Personen",
+categories:["schule","kreativ","lernen"],
+locations:["inside"],
+steps:[
+"Wähle ein Schulfach.",
+"Suche ein überraschendes Thema.",
+"Überlege dir eine ungewöhnliche Präsentationsform.",
+"Erstelle einen ersten Entwurf.",
+"Teste ihn an jemand anderem."
+],
+materials:["Papier","Stifte","Computer oder Smartphone"]
+}
+
+];
+
+
+/* =========================================
+   LOCAL STORAGE
+========================================= */
+
+function getSavedIdeas() {
+
+    return JSON.parse(
+        localStorage.getItem("ideefixSavedIdeas")
+    ) || [];
+
+}
+
+function setSavedIdeas(saved) {
+
+    localStorage.setItem(
+        "ideefixSavedIdeas",
+        JSON.stringify(saved)
+    );
+
+}
+
+function getOwnIdeas() {
+
+    return JSON.parse(
+        localStorage.getItem("ideefixOwnIdeas")
+    ) || [];
+
+}
+
+function setOwnIdeas(ideas) {
+
+    localStorage.setItem(
+        "ideefixOwnIdeas",
+        JSON.stringify(ideas)
+    );
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+function setHeroText(text) {
+
+    document.getElementById("heroInput").value = text;
+
+    document.getElementById("finder").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+function findFromHero() {
+
+    const input =
+        document.getElementById("heroInput").value.toLowerCase();
+
+    if (
+        input.includes("schule") ||
+        input.includes("projekt")
+    ) {
+        document.getElementById("category").value="schule";
+    }
+
+    else if (
+        input.includes("freund") ||
+        input.includes("zusammen")
+    ) {
+        document.getElementById("category").value="freunde";
+    }
+
+    else if (
+        input.includes("kreativ") ||
+        input.includes("basteln")
+    ) {
+        document.getElementById("category").value="kreativ";
+    }
+
+    else if (
+        input.includes("sport") ||
+        input.includes("beweg")
+    ) {
+        document.getElementById("category").value="sport";
+    }
+
+    else if (input.includes("lernen")) {
+        document.getElementById("category").value="lernen";
+    }
+
+    else if (
+        input.includes("draußen") ||
+        input.includes("outdoor")
+    ) {
+        document.getElementById("location").value="outside";
+    }
+
+    document.getElementById("finder").scrollIntoView({
+        behavior:"smooth"
+    });
+
+    setTimeout(generateIdea,500);
+
+}
+
+
+/* =========================================
+   IDEE GENERIEREN
+========================================= */
+
+function generateIdea() {
+
+    const category =
+        document.getElementById("category").value;
+
+    const location =
+        document.getElementById("location").value;
+
+    let possibleIdeas =
+        ideas.filter(idea =>
+            idea.categories.includes(category)
+        );
+
+    if (location !== "any") {
+
+        const locationMatches =
+            possibleIdeas.filter(idea =>
+                idea.locations.includes(location)
+            );
+
+        if (locationMatches.length > 0) {
+            possibleIdeas=locationMatches;
+        }
+
+    }
+
+    if (possibleIdeas.length===0) {
+        possibleIdeas=ideas;
+    }
+
+    const randomIndex =
+        Math.floor(Math.random()*possibleIdeas.length);
+
+    displayIdea(possibleIdeas[randomIndex]);
+
+}
+
+
+/* =========================================
+   IDEE ANZEIGEN
+========================================= */
+
+let currentIdea=null;
+
+function displayIdea(idea) {
+
+    currentIdea=idea;
+
+    document.getElementById("resultTitle").textContent=
+        "💡 "+idea.title;
+
+    document.getElementById("resultDescription").textContent=
+        idea.description;
+
+    document.getElementById("resultTime").textContent=
+        "⏱️ "+idea.time;
+
+    document.getElementById("resultCost").textContent=
+        "💰 "+idea.cost;
+
+    document.getElementById("resultPeople").textContent=
+        "👥 "+idea.people;
+
+
+    const steps=
+        document.getElementById("resultSteps");
+
+    steps.innerHTML="";
+
+    idea.steps.forEach(step=>{
+
+        const li=document.createElement("li");
+
+        li.textContent=step;
+
+        steps.appendChild(li);
+
+    });
+
+
+    const materials=
+        document.getElementById("resultMaterials");
+
+    materials.innerHTML="";
+
+    idea.materials.forEach(material=>{
+
+        const li=document.createElement("li");
+
+        li.textContent=material;
+
+        materials.appendChild(li);
+
+    });
+
+
+    updateFavoriteButton();
+
+
+    document.getElementById("result")
+        .classList.add("show");
+
+    document.getElementById("result")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+}
+
+
+/* =========================================
+   MERKEN
+========================================= */
+
+function saveCurrentIdea() {
+
+    if (!currentIdea) return;
+
+    let saved=getSavedIdeas();
+
+    const exists=
+        saved.some(idea =>
+            idea.title===currentIdea.title
+        );
+
+    if (!exists) {
+
+        saved.push(currentIdea);
+
+        setSavedIdeas(saved);
+
+    }
+
+    updateFavoriteButton();
+
+    renderSavedIdeas();
+
+}
+
+
+function updateFavoriteButton() {
+
+    const button=
+        document.getElementById("favoriteButton");
+
+    if (!currentIdea) return;
+
+    const saved=getSavedIdeas();
+
+    const exists=
+        saved.some(idea =>
+            idea.title===currentIdea.title
+        );
+
+    if (exists) {
+
+        button.textContent="♥ Gemerkt";
+        button.classList.add("saved");
+
+    } else {
+
+        button.textContent="♡ Merken";
+        button.classList.remove("saved");
+
+    }
+
+}
+
+
+function removeSavedIdea(title) {
+
+    const saved=
+        getSavedIdeas().filter(
+            idea=>idea.title!==title
+        );
+
+    setSavedIdeas(saved);
+
+    renderSavedIdeas();
+
+    updateFavoriteButton();
+
+}
+
+
+function renderSavedIdeas() {
+
+    const container=
+        document.getElementById("savedList");
+
+    const saved=getSavedIdeas();
+
+    container.innerHTML="";
+
+    if (saved.length===0) {
+
+        container.innerHTML=`
+            <div class="empty-state" style="grid-column:1/-1;">
+                <div style="font-size:40px;margin-bottom:10px;">💡</div>
+                <strong>Noch keine gemerkten Ideen.</strong>
+                <p>Wenn dir eine Idee gefällt, klicke auf „Merken“.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    saved.forEach(idea=>{
+
+        const card=
+            document.createElement("div");
+
+        card.className="idea-card";
+
+        card.innerHTML=`
+
+            <h3>${escapeHtml(idea.title)}</h3>
+
+            <p>${escapeHtml(idea.description)}</p>
+
+            <div class="result-details" style="margin-top:14px;">
+
+                <span class="detail">
+                    ⏱️ ${escapeHtml(idea.time)}
+                </span>
+
+                <span class="detail">
+                    💰 ${escapeHtml(idea.cost)}
+                </span>
+
             </div>
 
-        </nav>
-    </header>
+            <div class="idea-card-actions">
 
+                <button class="secondary-button"
+                    onclick='showSavedIdea(${JSON.stringify(idea).replace(/'/g,"&#39;")})'>
+                    👀 Anzeigen
+                </button>
 
-    <!-- =========================
-         STARTSEITE
-    ========================= -->
-
-    <main>
-
-        <section class="hero" id="start">
-
-            <div class="hero-content">
-
-                <div class="badge">
-                    💡 Dein Ideenhelfer
-                </div>
-
-                <h1>
-                    Keine Idee?<br>
-                    <span>Ideefix.</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    Sag uns, was du vorhast – Ideefix findet eine passende Idee für dich.
-                </p>
-
-                <div class="search-box">
-
-                    <input
-                        type="text"
-                        id="heroInput"
-                        placeholder="Was möchtest du machen?"
-                        aria-label="Was möchtest du machen?"
-                    >
-
-                    <button class="primary-button" onclick="findFromHero()">
-                        ✨ Idee finden
-                    </button>
-
-                </div>
-
-                <div class="quick-options">
-
-                    <button class="quick-option" onclick="setHeroText('Mir ist langweilig')">
-                        😴 Mir ist langweilig
-                    </button>
-
-                    <button class="quick-option" onclick="setHeroText('Etwas mit Freunden')">
-                        👥 Mit Freunden
-                    </button>
-
-                    <button class="quick-option" onclick="setHeroText('Etwas draußen')">
-                        🌳 Draußen
-                    </button>
-
-                    <button class="quick-option" onclick="setHeroText('Etwas Kreatives')">
-                        🎨 Kreativ
-                    </button>
-
-                    <button class="quick-option" onclick="setHeroText('Für die Schule')">
-                        📚 Schule
-                    </button>
-
-                </div>
+                <button class="secondary-button"
+                    onclick="removeSavedIdea('${escapeJs(idea.title)}')">
+                    🗑️ Entfernen
+                </button>
 
             </div>
+        `;
 
-        </section>
+        container.appendChild(card);
 
+    });
 
-        <!-- =========================
-             IDEENFINDER
-        ========================= -->
+}
 
-        <section class="finder" id="finder">
 
-            <div class="section-container">
+function showSavedIdea(idea) {
 
-                <div class="section-heading">
+    displayIdea(idea);
 
-                    <h2>Finde deine Idee</h2>
+    document.getElementById("finder")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 
-                    <p>
-                        Je mehr du uns verrätst, desto besser kann Ideefix
-                        die Vorschläge auf dich abstimmen.
-                    </p>
+}
 
-                </div>
 
+/* =========================================
+   ÜBERRASCH MICH
+========================================= */
 
-                <div class="finder-card">
+function surpriseMe() {
 
-                    <div class="finder-grid">
+    const randomIndex=
+        Math.floor(Math.random()*ideas.length);
 
-                        <div class="field">
+    const idea=ideas[randomIndex];
 
-                            <label for="category">
-                                Was suchst du?
-                            </label>
+    const output=
+        document.getElementById("surpriseResult");
 
-                            <select id="category">
+    output.innerHTML=`
 
-                                <option value="freizeit">
-                                    Freizeit
-                                </option>
+        <h3>💡 ${escapeHtml(idea.title)}</h3>
 
-                                <option value="freunde">
-                                    Freunde
-                                </option>
+        <p style="margin-bottom:15px;">
+            ${escapeHtml(idea.description)}
+        </p>
 
-                                <option value="familie">
-                                    Familie
-                                </option>
+        <div class="result-details">
 
-                                <option value="schule">
-                                    Schule
-                                </option>
+            <span class="detail">
+                ⏱️ ${escapeHtml(idea.time)}
+            </span>
 
-                                <option value="kreativ">
-                                    Kreativität
-                                </option>
+            <span class="detail">
+                💰 ${escapeHtml(idea.cost)}
+            </span>
 
-                                <option value="lernen">
-                                    Lernen
-                                </option>
-
-                                <option value="sport">
-                                    Sport
-                                </option>
-
-                                <option value="abenteuer">
-                                    Abenteuer
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label for="people">
-                                Wie viele Personen?
-                            </label>
-
-                            <select id="people">
-
-                                <option value="1">
-                                    1 Person
-                                </option>
-
-                                <option value="2">
-                                    2 Personen
-                                </option>
-
-                                <option value="group">
-                                    3–5 Personen
-                                </option>
-
-                                <option value="many">
-                                    6+ Personen
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label for="time">
-                                Wie viel Zeit?
-                            </label>
-
-                            <select id="time">
-
-                                <option value="short">
-                                    10–30 Minuten
-                                </option>
-
-                                <option value="medium">
-                                    30–60 Minuten
-                                </option>
-
-                                <option value="long">
-                                    1–3 Stunden
-                                </option>
-
-                                <option value="day">
-                                    Ein ganzer Tag
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label for="budget">
-                                Dein Budget
-                            </label>
-
-                            <select id="budget">
-
-                                <option value="free">
-                                    0 €
-                                </option>
-
-                                <option value="small">
-                                    Bis 5 €
-                                </option>
-
-                                <option value="medium">
-                                    Bis 15 €
-                                </option>
-
-                                <option value="large">
-                                    Bis 30 €
-                                </option>
-
-                                <option value="any">
-                                    Egal
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label for="location">
-                                Wo?
-                            </label>
-
-                            <select id="location">
-
-                                <option value="inside">
-                                    Drinnen
-                                </option>
-
-                                <option value="outside">
-                                    Draußen
-                                </option>
-
-                                <option value="any">
-                                    Egal
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <button class="finder-button" onclick="generateIdea()">
-                        💡 Meine Idee finden
-                    </button>
-
-                </div>
-
-
-                <!-- ERGEBNIS -->
-
-                <div class="result" id="result">
-
-                    <h3 id="resultTitle">
-                        Deine Idee
-                    </h3>
-
-                    <p class="result-description" id="resultDescription"></p>
-
-                    <div class="result-details">
-
-                        <span class="detail" id="resultTime"></span>
-                        <span class="detail" id="resultCost"></span>
-                        <span class="detail" id="resultPeople"></span>
-
-                    </div>
-
-                    <h4>So geht's</h4>
-
-                    <ol id="resultSteps"></ol>
-
-                    <h4>Das brauchst du</h4>
-
-                    <ul id="resultMaterials"></ul>
-
-                    <div class="result-actions">
-
-                        <button class="secondary-button" onclick="generateIdea()">
-                            🔄 Andere Idee
-                        </button>
-
-                        <button class="secondary-button" onclick="saveIdea()">
-                            ❤️ Idee speichern
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             KATEGORIEN
-        ========================= -->
-
-        <section class="categories" id="kategorien">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <h2>Was suchst du?</h2>
-
-                    <p>
-                        Stöbere durch unsere Ideen.
-                    </p>
-
-                </div>
-
-
-                <div class="category-grid">
-
-                    <div class="category" onclick="chooseCategory('freizeit')">
-                        <span class="category-icon">🎯</span>
-                        <strong>Freizeit</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('freunde')">
-                        <span class="category-icon">👥</span>
-                        <strong>Freunde</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('familie')">
-                        <span class="category-icon">🏠</span>
-                        <strong>Familie</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('kreativ')">
-                        <span class="category-icon">🎨</span>
-                        <strong>Kreativ</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('schule')">
-                        <span class="category-icon">📚</span>
-                        <strong>Schule</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('lernen')">
-                        <span class="category-icon">🧠</span>
-                        <strong>Lernen</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('sport')">
-                        <span class="category-icon">🏃</span>
-                        <strong>Sport</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('abenteuer')">
-                        <span class="category-icon">🗺️</span>
-                        <strong>Abenteuer</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('freizeit')">
-                        <span class="category-icon">🎬</span>
-                        <strong>Videos</strong>
-                    </div>
-
-                    <div class="category" onclick="chooseCategory('kreativ')">
-                        <span class="category-icon">🎁</span>
-                        <strong>Geschenke</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ÜBERRASCH MICH
-        ========================= -->
-
-        <section class="surprise">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <h2>Keine Lust zu suchen?</h2>
-
-                    <p>
-                        Dann lass Ideefix entscheiden.
-                    </p>
-
-                </div>
-
-                <div class="surprise-box">
-
-                    <button class="surprise-button" onclick="surpriseMe()">
-                        ✨ Überrasch mich!
-                    </button>
-
-                    <div id="surpriseResult"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ÜBER IDEEFIX
-        ========================= -->
-
-        <section class="about" id="about">
-
-            <div class="section-container">
-
-                <div class="about-content">
-
-                    <div class="section-heading">
-
-                        <h2>Was ist Ideefix?</h2>
-
-                    </div>
-
-                    <p>
-                        Ideefix ist für alle Momente, in denen dir einfach
-                        keine Idee einfällt.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Egal ob Langeweile, Freizeit, Schule, Freunde oder
-                        ein spontanes Abenteuer – Ideefix hilft dir dabei,
-                        schnell etwas Passendes zu finden.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer>
-
-        <div class="footer-container">
-
-            <div>
-
-                <div class="footer-logo">
-                    Idee<span>fix</span>
-                </div>
-
-                <p class="footer-text">
-                    Keine Idee? Ideefix.
-                </p>
-
-            </div>
-
-            <div class="footer-links">
-
-                <a href="#start">Startseite</a>
-                <a href="#finder">Ideen finden</a>
-                <a href="#about">Über Ideefix</a>
-
-            </div>
+            <span class="detail">
+                👥 ${escapeHtml(idea.people)}
+            </span>
 
         </div>
 
-    </footer>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
-    <script>
-
-        /*
-         * ==========================================
-         * IDEEN-DATENBANK
-         * ==========================================
-         */
-
-        const ideas = [
-
-            {
-                title: "Dreht euren eigenen 5-Minuten-Film",
-                description: "Erfindet eine absurde Geschichte und dreht daraus einen kurzen Film.",
-                time: "ca. 1 Stunde",
-                cost: "0 €",
-                people: "2–6 Personen",
-                categories: ["freunde", "kreativ", "freizeit"],
-                locations: ["inside", "outside"],
-                steps: [
-                    "Denkt euch eine möglichst verrückte Geschichte aus.",
-                    "Verteilt die Rollen.",
-                    "Dreht mehrere kurze Szenen mit dem Smartphone.",
-                    "Schneidet die Szenen zu einem Film zusammen.",
-                    "Schaut euch euren Film gemeinsam an."
-                ],
-                materials: [
-                    "Smartphone",
-                    "ein paar Requisiten",
-                    "Freunde"
-                ]
-            },
-
-            {
-                title: "Die 10-Euro-Challenge",
-                description: "Ihr habt ein kleines Budget und müsst damit den besten gemeinsamen Nachmittag planen.",
-                time: "2–3 Stunden",
-                cost: "bis 10 €",
-                people: "2–6 Personen",
-                categories: ["freunde", "abenteuer", "freizeit"],
-                locations: ["outside"],
-                steps: [
-                    "Legt ein gemeinsames Budget von 10 € fest.",
-                    "Überlegt euch drei verschiedene Möglichkeiten.",
-                    "Entscheidet euch gemeinsam für eine.",
-                    "Setzt euren Plan um.",
-                    "Bewertet am Ende, wie gut ihr das Geld eingesetzt habt."
-                ],
-                materials: [
-                    "10 €",
-                    "Papier oder Smartphone",
-                    "etwas Kreativität"
-                ]
-            },
-
-            {
-                title: "Erfinde ein komplett neues Spiel",
-                description: "Entwickle ein Spiel, das es noch nicht gibt.",
-                time: "30–60 Minuten",
-                cost: "0 €",
-                people: "1–5 Personen",
-                categories: ["kreativ", "freunde", "familie"],
-                locations: ["inside"],
-                steps: [
-                    "Überlegt euch das Ziel des Spiels.",
-                    "Legt drei bis fünf Regeln fest.",
-                    "Baut ein einfaches Spielfeld oder Material.",
-                    "Spielt eine Testrunde.",
-                    "Verbessert die Regeln."
-                ],
-                materials: [
-                    "Papier",
-                    "Stifte",
-                    "Alltagsgegenstände"
-                ]
-            },
-
-            {
-                title: "Foto-Safari",
-                description: "Geht nach draußen und sucht ungewöhnliche Motive.",
-                time: "30–60 Minuten",
-                cost: "0 €",
-                people: "1–5 Personen",
-                categories: ["freizeit", "abenteuer", "freunde"],
-                locations: ["outside"],
-                steps: [
-                    "Erstellt eine Liste mit zehn Motiven.",
-                    "Geht nach draußen.",
-                    "Versucht jedes Motiv zu fotografieren.",
-                    "Gebt euch gegenseitig Punkte.",
-                    "Kürt das beste Foto."
-                ],
-                materials: [
-                    "Smartphone",
-                    "Liste mit Motiven"
-                ]
-            },
-
-            {
-                title: "Lerne etwas völlig Neues",
-                description: "Suche dir eine Fähigkeit aus, die du heute zum ersten Mal ausprobierst.",
-                time: "30–60 Minuten",
-                cost: "0 €",
-                people: "1 Person",
-                categories: ["lernen", "kreativ", "freizeit"],
-                locations: ["inside", "outside"],
-                steps: [
-                    "Wähle eine neue Fähigkeit.",
-                    "Suche dir eine einfache Einführung.",
-                    "Übe 30 Minuten.",
-                    "Versuche etwas Eigenes damit zu machen.",
-                    "Notiere, was du gelernt hast."
-                ],
-                materials: [
-                    "Smartphone oder Computer",
-                    "Material passend zur Fähigkeit"
-                ]
-            },
-
-            {
-                title: "Mini-Olympiade",
-                description: "Veranstaltet eure eigene verrückte Sportolympiade.",
-                time: "1–2 Stunden",
-                cost: "0 €",
-                people: "3–10 Personen",
-                categories: ["sport", "freunde", "familie"],
-                locations: ["outside"],
-                steps: [
-                    "Erfindet fünf ungewöhnliche Disziplinen.",
-                    "Legt Punkte fest.",
-                    "Bildet Teams oder tretet einzeln an.",
-                    "Führt die Wettbewerbe durch.",
-                    "Kürt den Sieger."
-                ],
-                materials: [
-                    "Sportkleidung",
-                    "Alltagsgegenstände",
-                    "Stift und Papier"
-                ]
-            },
-
-            {
-                title: "Der verrückte Kochabend",
-                description: "Kocht gemeinsam ein Gericht, das niemand vorher kennt.",
-                time: "1–3 Stunden",
-                cost: "bis 15 €",
-                people: "2–6 Personen",
-                categories: ["familie", "freunde", "kreativ"],
-                locations: ["inside"],
-                steps: [
-                    "Legt ein Budget fest.",
-                    "Kauft ungewöhnliche Zutaten.",
-                    "Erfindet gemeinsam ein Gericht.",
-                    "Kocht zusammen.",
-                    "Bewertet das Ergebnis."
-                ],
-                materials: [
-                    "Zutaten",
-                    "Küche",
-                    "Papier für die Bewertung"
-                ]
-            },
-
-            {
-                title: "Die geheime Mission",
-                description: "Erfindet eine kleine Schnitzeljagd mit geheimen Aufgaben.",
-                time: "1–2 Stunden",
-                cost: "0 €",
-                people: "2–8 Personen",
-                categories: ["abenteuer", "freunde", "familie"],
-                locations: ["outside"],
-                steps: [
-                    "Erfindet mehrere Hinweise.",
-                    "Versteckt die Hinweise.",
-                    "Legt eine finale Aufgabe fest.",
-                    "Startet die Mission.",
-                    "Findet gemeinsam den Schatz."
-                ],
-                materials: [
-                    "Papier",
-                    "Stifte",
-                    "kleiner Schatz"
-                ]
-            },
-
-            {
-                title: "Schulprojekt aus einer verrückten Idee",
-                description: "Nimm ein völlig normales Thema und verwandle es in ein ungewöhnliches Projekt.",
-                time: "1–3 Stunden",
-                cost: "0 €",
-                people: "1–5 Personen",
-                categories: ["schule", "kreativ", "lernen"],
-                locations: ["inside"],
-                steps: [
-                    "Wähle ein Schulfach.",
-                    "Suche ein überraschendes Thema.",
-                    "Überlege dir eine ungewöhnliche Präsentationsform.",
-                    "Erstelle einen ersten Entwurf.",
-                    "Teste ihn an jemand anderem."
-                ],
-                materials: [
-                    "Papier",
-                    "Stifte",
-                    "Computer oder Smartphone"
-                ]
-            }
-
-        ];
-
-
-        /*
-         * ==========================================
-         * HERO
-         * ==========================================
-         */
-
-        function setHeroText(text) {
-
-            document.getElementById("heroInput").value = text;
-
-            document.getElementById("finder").scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-
-        function findFromHero() {
-
-            const input =
-                document.getElementById("heroInput").value.toLowerCase();
-
-            if (input.includes("schule")) {
-                document.getElementById("category").value = "schule";
-            }
-
-            else if (
-                input.includes("freund") ||
-                input.includes("zusammen")
-            ) {
-                document.getElementById("category").value = "freunde";
-            }
-
-            else if (
-                input.includes("kreativ") ||
-                input.includes("basteln")
-            ) {
-                document.getElementById("category").value = "kreativ";
-            }
-
-            else if (
-                input.includes("sport") ||
-                input.includes("beweg")
-            ) {
-                document.getElementById("category").value = "sport";
-            }
-
-            else if (
-                input.includes("lernen") ||
-                input.includes("lernen")
-            ) {
-                document.getElementById("category").value = "lernen";
-            }
-
-            document.getElementById("finder").scrollIntoView({
-                behavior: "smooth"
-            });
-
-            setTimeout(generateIdea, 500);
-        }
-
-
-        /*
-         * ==========================================
-         * IDEE GENERIEREN
-         * ==========================================
-         */
-
-        function generateIdea() {
-
-            const category =
-                document.getElementById("category").value;
-
-            const people =
-                document.getElementById("people").value;
-
-            const time =
-                document.getElementById("time").value;
-
-            const budget =
-                document.getElementById("budget").value;
-
-            const location =
-                document.getElementById("location").value;
-
-
-            let possibleIdeas = ideas.filter(idea => {
-
-                return idea.categories.includes(category);
-
-            });
-
-
-            if (location !== "any") {
-
-                const locationMatches =
-                    possibleIdeas.filter(idea =>
-                        idea.locations.includes(location)
-                    );
-
-                if (locationMatches.length > 0) {
-                    possibleIdeas = locationMatches;
-                }
-
-            }
-
-
-            /*
-             * Falls keine perfekte Übereinstimmung existiert,
-             * werden passende Ideen aus der gesamten Datenbank verwendet.
-             */
+        <h4>So geht's</h4>
 
-            if (possibleIdeas.length === 0) {
-                possibleIdeas = ideas;
-            }
+        <ol>
+            ${idea.steps.map(
+                step=>`<li>${escapeHtml(step)}</li>`
+            ).join("")}
+        </ol>
 
+        <h4>Das brauchst du</h4>
 
-            const randomIndex =
-                Math.floor(Math.random() * possibleIdeas.length);
+        <ul>
+            ${idea.materials.map(
+                item=>`<li>${escapeHtml(item)}</li>`
+            ).join("")}
+        </ul>
 
-            const idea =
-                possibleIdeas[randomIndex];
+        <div style="margin-top:20px;">
 
+            <button
+                class="secondary-button"
+                onclick="saveIdeaDirectly(${JSON.stringify(idea).replace(/"/g,'&quot;')})"
+            >
+                ♡ Idee merken
+            </button>
 
-            displayIdea(idea);
+        </div>
+    `;
 
-        }
+    output.classList.add("show");
 
+}
 
-        /*
-         * ==========================================
-         * IDEE ANZEIGEN
-         * ==========================================
-         */
 
-        function displayIdea(idea) {
+function saveIdeaDirectly(idea) {
 
-            document.getElementById("resultTitle").textContent =
-                "💡 " + idea.title;
+    const saved=getSavedIdeas();
 
-            document.getElementById("resultDescription").textContent =
-                idea.description;
+    if (
+        !saved.some(item=>item.title===idea.title)
+    ) {
 
-            document.getElementById("resultTime").textContent =
-                "⏱️ " + idea.time;
+        saved.push(idea);
 
-            document.getElementById("resultCost").textContent =
-                "💰 " + idea.cost;
+        setSavedIdeas(saved);
 
-            document.getElementById("resultPeople").textContent =
-                "👥 " + idea.people;
+        renderSavedIdeas();
 
+    }
 
-            const steps =
-                document.getElementById("resultSteps");
+}
 
-            steps.innerHTML = "";
 
-            idea.steps.forEach(step => {
+/* =========================================
+   KATEGORIEN
+========================================= */
 
-                const li =
-                    document.createElement("li");
+function chooseCategory(category) {
 
-                li.textContent = step;
+    document.getElementById("category").value=
+        category;
 
-                steps.appendChild(li);
+    document.getElementById("finder")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 
-            });
+    setTimeout(generateIdea,500);
 
+}
 
-            const materials =
-                document.getElementById("resultMaterials");
 
-            materials.innerHTML = "";
+/* =========================================
+   EIGENE IDEEN
+========================================= */
 
-            idea.materials.forEach(material => {
+function addOwnIdea() {
 
-                const li =
-                    document.createElement("li");
+    const title=
+        document.getElementById("ownTitle").value.trim();
 
-                li.textContent = material;
+    const description=
+        document.getElementById("ownDescription").value.trim();
 
-                materials.appendChild(li);
+    const time=
+        document.getElementById("ownTime").value.trim();
 
-            });
+    const cost=
+        document.getElementById("ownCost").value.trim();
 
+    const people=
+        document.getElementById("ownPeople").value.trim();
 
-            const result =
-                document.getElementById("result");
+    const stepsText=
+        document.getElementById("ownSteps").value.trim();
 
-            result.classList.add("show");
+    const materialsText=
+        document.getElementById("ownMaterials").value.trim();
 
-            result.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
 
-        }
+    if (!title || !description) {
 
+        alert("Bitte gib mindestens einen Namen und eine Beschreibung ein.");
 
-        /*
-         * ==========================================
-         * KATEGORIEN
-         * ==========================================
-         */
+        return;
 
-        function chooseCategory(category) {
+    }
 
-            document.getElementById("category").value =
-                category;
 
-            document.getElementById("finder").scrollIntoView({
-                behavior: "smooth"
-            });
+    const idea={
 
-            setTimeout(generateIdea, 500);
+        id:Date.now(),
 
-        }
+        title:title,
 
+        description:description,
 
-        /*
-         * ==========================================
-         * ÜBERRASCH MICH
-         * ==========================================
-         */
+        time:time || "Keine Angabe",
 
-        function surpriseMe() {
+        cost:cost || "Keine Angabe",
 
-            const randomIndex =
-                Math.floor(Math.random() * ideas.length);
+        people:people || "Keine Angabe",
 
-            const idea =
-                ideas[randomIndex];
+        steps:stepsText
+            ? stepsText.split("\n").filter(x=>x.trim())
+            : ["Eigene Anleitung"],
 
-            const output =
-                document.getElementById("surpriseResult");
+        materials:materialsText
+            ? materialsText.split("\n").filter(x=>x.trim())
+            : ["Keine Angabe"]
 
-            output.textContent =
-                "✨ " + idea.title;
+    };
 
-        }
 
+    const ownIdeas=getOwnIdeas();
 
-        /*
-         * ==========================================
-         * IDEE SPEICHERN
-         * ==========================================
-         */
+    ownIdeas.push(idea);
 
-        function saveIdea() {
+    setOwnIdeas(ownIdeas);
 
-            const title =
-                document.getElementById("resultTitle").textContent;
 
-            if (title === "Deine Idee") {
-                return;
-            }
+    document.getElementById("ownTitle").value="";
+    document.getElementById("ownDescription").value="";
+    document.getElementById("ownTime").value="";
+    document.getElementById("ownCost").value="";
+    document.getElementById("ownPeople").value="";
+    document.getElementById("ownSteps").value="";
+    document.getElementById("ownMaterials").value="";
 
-            let saved =
-                JSON.parse(
-                    localStorage.getItem("ideefixSavedIdeas")
-                ) || [];
 
-            if (!saved.includes(title)) {
+    renderOwnIdeas();
 
-                saved.push(title);
+    alert("✅ Deine Idee wurde gespeichert!");
 
-                localStorage.setItem(
-                    "ideefixSavedIdeas",
-                    JSON.stringify(saved)
-                );
+}
 
-                alert("❤️ Idee gespeichert!");
 
-            } else {
+function renderOwnIdeas() {
 
-                alert("Diese Idee ist bereits gespeichert.");
+    const container=
+        document.getElementById("myIdeas");
 
-            }
+    const ownIdeas=getOwnIdeas();
 
-        }
+    container.innerHTML="";
 
-    </script>
+
+    if (ownIdeas.length===0) {
+
+        container.innerHTML=`
+            <div class="empty-state">
+                Noch keine eigenen Ideen erstellt.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    ownIdeas.forEach(idea=>{
+
+        const card=
+            document.createElement("div");
+
+        card.className="my-idea-card";
+
+        card.innerHTML=`
+
+            <h3>✏️ ${escapeHtml(idea.title)}</h3>
+
+            <p>
+                ${escapeHtml(idea.description)}
+            </p>
+
+            <div class="my-idea-meta">
+
+                <span class="detail">
+                    ⏱️ ${escapeHtml(idea.time)}
+                </span>
+
+                <span class="detail">
+                    💰 ${escapeHtml(idea.cost)}
+                </span>
+
+                <span class="detail">
+                    👥 ${escapeHtml(idea.people)}
+                </span>
+
+            </div>
+
+            <div class="idea-card-actions">
+
+                <button
+                    class="secondary-button"
+                    onclick="deleteOwnIdea(${idea.id})"
+                >
+                    🗑️ Löschen
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+function deleteOwnIdea(id) {
+
+    const confirmed=
+        confirm("Möchtest du diese eigene Idee wirklich löschen?");
+
+    if (!confirmed) return;
+
+    const remaining=
+        getOwnIdeas().filter(
+            idea=>idea.id!==id
+        );
+
+    setOwnIdeas(remaining);
+
+    renderOwnIdeas();
+
+}
+
+
+/* =========================================
+   SICHERHEIT / TEXT
+========================================= */
+
+function escapeHtml(text) {
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(text) {
+
+    return String(text)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+renderSavedIdeas();
+renderOwnIdeas();
+
+</script>
 
 </body>
 </html>
